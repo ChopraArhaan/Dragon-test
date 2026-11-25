@@ -1,0 +1,55 @@
+name: Update profile dragon
+
+on:
+  schedule:
+    # Daily at 07:17 UTC. Change the cron if you want a different local hour.
+    - cron: "17 7 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: profile-dragon
+  cancel-in-progress: true
+
+jobs:
+  update-dragon:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout profile repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Grow the dragon
+        env:
+          # Built-in token: public activity only. Add a PET_TOKEN secret (classic PAT
+          # with read:user) if you want private contribution counts too.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PET_TOKEN: ${{ secrets.PET_TOKEN }}
+          PET_USERNAME: ${{ github.repository_owner }}
+          # Set the repository variable PET_TIMEZONE (e.g. Asia/Kolkata) to make
+          # "today", weekends and the day/night scene follow your local clock.
+          PET_TIMEZONE: ${{ vars.PET_TIMEZONE || 'UTC' }}
+        run: node src/index.js
+
+      - name: Commit the updated SVG
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/pet.svg assets/pet-state.json
+          if git diff --cached --quiet; then
+            echo "No dragon changes today."
+            exit 0
+          fi
+          git commit -m "chore: update profile dragon [skip ci]"
+          git push

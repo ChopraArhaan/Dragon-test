@@ -1,0 +1,18 @@
+{
+  "name": "github-profile-dragon",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A pixel-art dragon that lives in your GitHub profile README and grows with your commits.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "preview": "node scripts/preview.js",
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "@octokit/rest": "^22.0.1"
+  }
+}
