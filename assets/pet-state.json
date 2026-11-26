@@ -1,20 +1,20 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-18T12:51:19.950Z",
+  "generatedAt": "2026-11-26T17:43:02.662Z",
   "login": "ChopraArhaan",
-  "totalCommits": 36,
-  "currentStreak": 4,
-  "longestStreak": 4,
-  "totalStars": 4,
-  "followers": 6,
-  "hunger": 100,
+  "totalCommits": 127,
+  "currentStreak": 12,
+  "longestStreak": 12,
+  "totalStars": 7,
+  "followers": 5,
+  "hunger": 91,
   "language": "Python",
   "weekly": {
-    "weekStart": "2026-11-16",
-    "prsOpened": 2,
-    "prsMerged": 2,
+    "weekStart": "2026-11-23",
+    "prsOpened": 3,
+    "prsMerged": 3,
     "issuesClosed": 0,
     "reviews": 0
   },
-  "latestCommitAt": 1794941976000
+  "latestCommitAt": 1795610420000
 }
